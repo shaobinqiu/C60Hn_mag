@@ -27,19 +27,22 @@ for ii=1:size(sub_str)
 end
 E_diff=E_ud2(:,4)-E_ud0(:,4);
 
+n=0;
 E_pre=[];
 for ll=1:size(D,1)
-    e_p=E_diff(D(ll,1)-1,1)+E_diff(D(ll,2)-1,1)+E_diff(D(ll,3)-1,1);
-    E_pre=[E_pre;e_p];
+    [x,m]=min([E_diff(D(ll,1)-1,1)+E_diff(D(ll,2)-1,1)+E_diff(D(ll,3)-1,1),E_diff(D(ll,1)-1,1),E_diff(D(ll,2)-1,1),E_diff(D(ll,3)-1,1)]);
+    r=min([E_diff(D(ll,1)-1,1),E_diff(D(ll,2)-1,1),E_diff(D(ll,3)-1,1)]);
+    delta=E_diff(D(ll,1)-1,1)+E_diff(D(ll,2)-1,1)+E_diff(D(ll,3)-1,1)-r;
+    E_pre=[E_pre;delta];
 end
 
-figure(1)
+
+figure(3)
 plot(E_diff,E_2s5M(2:24,5),'*')
 hold on 
 plot([0,0],[0,3.5],'-r')
 
-figure(2)
+figure(4)
 plot(E_pre,E_2s5M(25:327,5),'*')
 hold on 
 plot([0,0],[0,3.5],'-r')
-    

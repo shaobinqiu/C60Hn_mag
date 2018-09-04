@@ -1,0 +1,25 @@
+clear%%%%decompose C60
+str=load('C60H4_str.txt');
+table=load('C60_table.txt');
+
+str_sub=[];
+ for  ii=1:size(str,1)
+     s=[str(ii,1), str(ii,2), str(ii,1), str(ii,3), str(ii,2), str(ii,3), str(ii,1), str(ii,4), str(ii,2), str(ii,4), str(ii,3), str(ii,4)];
+     str_sub=[str_sub;s];
+ end
+ S=[];
+ all=[];
+ for jj=1:size(str_sub,1)
+     for kk=1:size(str_sub,2)*0.5
+         tmp=table(:,str_sub(jj,(2*kk-1):2*kk));
+         for ll=1:size(tmp,1)
+             tmp(ll,:)=sort(tmp(ll,:));
+         end
+         tmp=unique(tmp,'rows');
+         ss(1,2*kk-1:2*kk)=tmp(1,:);
+         all=[all;tmp(1,:)];
+     end
+     S=[S;ss];
+ end
+ all=unique(all,'rows');
+   save C60_H4_sub.txt S -ascii       
